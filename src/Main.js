@@ -4,7 +4,8 @@ import {useState} from 'react';
 
 function Main(){
 
-    const [movieList, setMovieList] = useState([{
+    const [movieList, setMovieList] = useState([
+        {
       "adult": false,
       "backdrop_path": "/euYIwmwkmz95mnXvufEmbL6ovhZ.jpg",
       "genre_ids": [
@@ -51,12 +52,16 @@ function Main(){
 
     return(
     <>
-    <div>
+    <div className='MainGrid'>
         <h1>이달의 영화</h1>
         <ul className="movieList">
             {movieList.map((movie,index) =>  
             <li className="movieList-li" key={index}>
-            <p>{movie.backdrop_path}</p>
+                <img 
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                alt={movie.title}
+                style={{ width: '50%', borderRadius: '8px' , marginTop: '20px'}}
+                />
             <p>{movie.title}</p>
             <p>{movie.overview}</p>
             </li>

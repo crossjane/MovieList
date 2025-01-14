@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 
 function Header(){
@@ -6,8 +7,12 @@ function Header(){
 <>
 
 <ul className="category">
-    <li>영화</li>
-    <li>드라마</li>
+    <li>
+      <Link to="/main">영화</Link>
+    </li>
+    <li>
+      <Link to="/drama">드라마</Link>
+    </li>
 </ul>
  
 </>

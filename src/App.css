@@ -1,19 +1,39 @@
 /* Header */
+body {
+ color: #232323dd;
+}
+
 .category{
   display: flex;
   list-style-type: none;
   gap: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #4f4f4f;
+}
+
+.category li a {
+  text-decoration: none; 
+  color: inherit;
+}
+
+.category li a:hover {
+  color: rgb(119, 159, 227); 
+}
+
+/* Main */
+.MainGrid{
+  margin: 100px 100px 0 100px 
 }
 
 
-/* Main */
 .movieList{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
   gap: 20px; 
   padding: 0;
   list-style: none; 
-  margin: 100px 50px 0 50px 
+  margin: 50px 0 0 0 
 }
 
 .movieList-li{
@@ -22,6 +42,4 @@
   padding: 16px;
   background-color: #f9f9f9;
   text-align: center;
-
-
 }
