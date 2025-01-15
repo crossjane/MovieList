@@ -63,6 +63,8 @@ function Main(){
                 style={{ width: '50%', borderRadius: '8px' , marginTop: '20px'}}
                 />
             <p>{movie.title}</p>
+            <p>개봉 일자: {movie.release_date}</p>
+            <p>관객 평: {movie.vote_average}</p>
             <p>{movie.overview}</p>
             </li>
             )}

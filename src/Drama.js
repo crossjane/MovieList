@@ -54,13 +54,17 @@ function Drama(){
         <ul className="movieList">
             {dramaList.map((drama,index) =>  
             <li className="movieList-li" key={index}>
+                <p>{drama.title}</p>
                 <img 
                 src={`https://image.tmdb.org/t/p/original${drama.poster_path}`}
                 alt={drama.title}
                 style={{ width: '50%', borderRadius: '8px' , marginTop: '20px'}}
                 />
-            <p>{drama.title}</p>
-            <p>{drama.overview}</p>
+            <div className='textContainer'>
+                <p>개봉 일자: {drama.release_date}</p>
+                <p>관객 평: {drama.vote_average}</p>
+                <p>{drama.overview}</p>
+            </div>
             </li>
             )}
         </ul>
