@@ -17,7 +17,7 @@ function Main() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-      },
+    },
       }
     );
     const data = await result.json();
@@ -29,7 +29,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        },
+   },
     });
     const data = await result.json();
     setPopular(data.results);
@@ -40,7 +40,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
+    },
     });
     const data = await result.json();
     setTopRated(data.results);
@@ -51,10 +51,14 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-     },
+          },
     });
     const data = await result.json();
     setUpcoming(data.results);
+  }
+
+  function deleteItem(){
+
   }
 
   //마운트가 됐을때 가장 먼저 실행되게 쓰는함수수

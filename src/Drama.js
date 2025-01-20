@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import DramaItem from './components/DramaItems';
+import DramaList from './components/DramaList';
 
 
 function Drama(){
@@ -9,7 +10,8 @@ function Drama(){
     const [onTheAir, setOnTheAir] = useState([]);
     const [popular, setPopular] = useState([]);
     const [topRated, setTopRated] = useState([]);
-    
+  
+  
     async function initData() {
       const result = await fetch(
         "https://api.themoviedb.org/3/tv/airing_today",
@@ -17,7 +19,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-         },
+             },
         }
        )
        const data = await result.json();
@@ -32,7 +34,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-     },
+             },
         }
        )
        const data = await result.json();
@@ -46,7 +48,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-               },
+           },
         }
        )
        const data = await result.json();
@@ -60,7 +62,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-               },
+           },
         }
        )
        const data = await result.json();
@@ -77,65 +79,22 @@ function Drama(){
     return(
     <>
     <div className='MainGrid'>
-        <h1>오늘 방영중</h1>
-        <ul className="movieList">
-            {airingToday.map((drama,index) =>  
-            <DramaItem 
-              key={index}
-              name={drama.name}
-              poster_path={drama.poster_path}
-              first_air_date={drama.first_air_date}
-              vote_average={drama.vote_average}
-              overview={drama.overview}
-            />
-            )}
-        </ul>
+      <DramaList 
+      subTitle={"오늘 방영중"}
+      dramas={airingToday}/>
+        
+      <DramaList 
+      subTitle={"방송 중"}
+      dramas={onTheAir}/>
 
-        <h1>방송 중</h1>
-        <ul className="movieList">
-         {airingToday.map((drama,index) =>  
-            <DramaItem 
-              key={index}
-              name={drama.name}
-              poster_path={drama.poster_path}
-              first_air_date={drama.first_air_date}
-              vote_average={drama.vote_average}
-              overview={drama.overview}
-            />
-            )}
-        </ul>
+      <DramaList 
+      subTitle={"인기 있는"}
+      dramas={popular}/>
 
-  
-
-
-        <h1>인기 있는</h1>
-        <ul className="movieList">
-        {airingToday.map((drama,index) =>  
-            <DramaItem 
-              key={index}
-              name={drama.name}
-              poster_path={drama.poster_path}
-              first_air_date={drama.first_air_date}
-              vote_average={drama.vote_average}
-              overview={drama.overview}
-            />
-            )}
-        </ul>
-
-
-        <h1>최고 평점</h1>
-        <ul className="movieList">
-        {airingToday.map((drama,index) =>  
-            <DramaItem 
-              key={index}
-              name={drama.name}
-              poster_path={drama.poster_path}
-              first_air_date={drama.first_air_date}
-              vote_average={drama.vote_average}
-              overview={drama.overview}
-            />
-            )}
-        </ul>
+      <DramaList 
+      subTitle={"최고 평점"}
+      dramas={topRated}/>
+      
     </div>
     </>
 
