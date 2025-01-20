@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import MovieItem from "./components/MovieItem";
 import MovieList from "./components/MovieList";
-
+import "./App.css";
 
 function Main() {
   const [nowPlayings, setNowPlayings] = useState([]);
@@ -17,7 +17,7 @@ function Main() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-           },
+      },
       }
     );
     const data = await result.json();
@@ -29,7 +29,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-       },
+        },
     });
     const data = await result.json();
     setPopular(data.results);
@@ -40,7 +40,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-       },
+      },
     });
     const data = await result.json();
     setTopRated(data.results);
@@ -51,7 +51,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
+     },
     });
     const data = await result.json();
     setUpcoming(data.results);
