@@ -19,7 +19,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-             },
+                   },
         }
        )
        const data = await result.json();
@@ -34,7 +34,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-             },
+           },
         }
        )
        const data = await result.json();
@@ -62,7 +62,7 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-           },
+        },
         }
        )
        const data = await result.json();
