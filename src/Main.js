@@ -22,7 +22,7 @@ function Main() {
         headers: {
           "Content-Type": "application/json",
           Authorization:
-            `Bearer ${process.env.REACT_API_KEY}`,
+            `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
       }
     );
@@ -42,7 +42,7 @@ function Main() {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-        `Bearer ${process.env.REACT_API_KEY}`,
+        `Bearer ${process.env.REACT_APP_API_KEY}`,
 
       },
     });
@@ -60,7 +60,7 @@ function Main() {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-        `Bearer ${process.env.REACT_API_KEY}`,
+        `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     });
     const data = await result.json();
@@ -77,7 +77,7 @@ function Main() {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-        `Bearer ${process.env.REACT_API_KEY}`,
+        `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     });
     const data = await result.json();

@@ -23,7 +23,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
+               `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         }
        )
@@ -40,7 +40,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
+               `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         }
        )
@@ -56,7 +56,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
+               `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         }
        )
@@ -72,7 +72,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
+               `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         }
        )
