@@ -4,6 +4,7 @@ import MovieItem from "./components/MovieItem";
 import MovieList from "./components/MovieList";
 import "./App.css";
 
+
 function Main() {
   const [nowPlayings, setNowPlayings] = useState([]);
   const [popular, setPopular] = useState([]);
@@ -20,11 +21,19 @@ function Main() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization:
+            `Bearer ${process.env.REACT_API_KEY}`,
         },
       }
     );
     const data = await result.json();
+  //배열 -> 반복문
+    for(let i = 0; i < data.results.length; i++){
+       data.results[i].isEdit = false;
+       data.results[i].tempTitle = "";
+     }
     setNowPlayings(data.results);
+
   }
 
   async function initData2() {
@@ -32,9 +41,16 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization:
+        `Bearer ${process.env.REACT_API_KEY}`,
+
       },
     });
     const data = await result.json();
+    for(let i = 0; i < data.results.length; i++){
+      data.results[i].isEdit = false;
+      data.results[i].tempTitle = "";
+    }
     setPopular(data.results);
   }
 
@@ -43,9 +59,15 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-          },
+        Authorization:
+        `Bearer ${process.env.REACT_API_KEY}`,
+      },
     });
     const data = await result.json();
+    for(let i = 0; i < data.results.length; i++){
+      data.results[i].isEdit = false;
+      data.results[i].tempTitle = "";
+    }
     setTopRated(data.results);
   }
 
@@ -54,9 +76,15 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-       },
+        Authorization:
+        `Bearer ${process.env.REACT_API_KEY}`,
+      },
     });
     const data = await result.json();
+    for(let i = 0; i < data.results.length; i++){
+      data.results[i].isEdit = false;
+      data.results[i].tempTitle = "";
+    }
     setUpcoming(data.results);
   }
 
@@ -77,34 +105,115 @@ function Main() {
   }
 
 
-  function editItem(id,title){
-    console.log("1221");
-    const copyNowplayings =[...nowPlayings];
-    const updatedNowplayings = copyNowplayings.map((movie) => movie.id === id ?
-    {...movie, isEdit: true}
-  : {...movie, isEdit: false} 
-  );
-   setNowPlayings(updatedNowplayings);
-    setEditId(id);
-    setTempTitle(title);
-    
- 
+  //주소값이 기떄문에.. 참조해서 만 쓴것. 
+  function editItem(id,title, division){
+
+    if(division === "upcoming"){
+      const copyUpcomings =[...upcoming];
+      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+      if(findUpcoming){
+        findUpcoming.isEdit = true;
+        findUpcoming.tempTitle = title;
+      }
+      setUpcoming(copyUpcomings);
+   } else if (division === "nowPlayings"){
+      const copyNowplayings =[...nowPlayings];
+      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+      if(findNowplayings){
+        findNowplayings.isEdit = true;
+        findNowplayings.tempTitle = title;
+      }
+      setNowPlayings(copyNowplayings);
+   } else if (division === "topRated"){
+      const copyTopRated =[...topRated];
+      const findTopRated = copyTopRated.find((movie) => movie.id === id);
+      if(findTopRated){
+        findTopRated.isEdit = true;
+        findTopRated.tempTitle = title;
+      }
+      setTopRated(copyTopRated);
+    } else if (division === "popular"){
+      const copyPopulars =[...popular];
+      const findPopular = copyPopulars.find((movie) => movie.id === id);
+      if(findPopular){
+        findPopular.isEdit = true;
+        findPopular.tempTitle = title;
+      }
+      setPopular(copyPopulars);
+  } 
   }
 
-  function onChangeInput(event){
-    setTempTitle(event.target.value);
-  }
-
-
-  function doneEditItem(id){
-    const copyNowplayings = [...nowPlayings];
-    const findIndex= copyNowplayings.findIndex((movie) => movie.id === id);
-    if(findIndex !== -1){
-      copyNowplayings[findIndex].title = tempTitle;
+  function onChangeInput(event, id, division){
+    if(division === "upcoming"){
+      const copyUpcomings =[...upcoming];
+      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+      if(findUpcoming){
+        findUpcoming.tempTitle = event.target.value;
+      }
+      setUpcoming(copyUpcomings);
+   } else if (division === "nowPlayings"){
+      const copyNowplayings =[...nowPlayings];
+      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+      if(findNowplayings){
+        findNowplayings.tempTitle = event.target.value;
+      }
+      setNowPlayings(copyNowplayings);
+   } else if (division === "topRated"){
+      const copyTopRated =[...topRated];
+      const findTopRated = copyTopRated.find((movie) => movie.id === id);
+      if(findTopRated){
+        findTopRated.tempTitle = event.target.value;
+      }
+      setTopRated(copyTopRated);
+    } else if (division === "popular"){
+      const copyPopulars =[...popular];
+      const findPopular = copyPopulars.find((movie) => movie.id === id);
+      if(findPopular){
+        findPopular.tempTitle = event.target.value;
+      }
+      setPopular(copyPopulars);
     }
-    setNowPlayings(copyNowplayings);
-    setIsEdit(false);
+    
   }
+
+
+  function doneEditItem(id, division){
+    if(division === "upcoming"){
+      const copyUpcomings =[...upcoming];
+      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+      if(findUpcoming){
+        findUpcoming.title = findUpcoming.tempTitle;
+        findUpcoming.isEdit = false;
+      }
+      setUpcoming(copyUpcomings);
+   } else if (division === "nowPlayings"){
+      const copyNowplayings =[...nowPlayings];
+      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+      if(findNowplayings){
+        findNowplayings.title = findNowplayings.tempTitle;
+        findNowplayings.isEdit = false;
+      }
+      setNowPlayings(copyNowplayings);
+   } else if (division === "topRated"){
+      const copyTopRated =[...topRated];
+      const findTopRated = copyTopRated.find((movie) => movie.id === id);
+      if(findTopRated){
+        findTopRated.title = findTopRated.tempTitle;
+        findTopRated.isEdit = false;
+      }
+      setTopRated(copyTopRated);
+    } else if (division === "popular"){
+      const copyPopulars =[...popular];
+      const findPopular = copyPopulars.find((movie) => movie.id === id);
+      if(findPopular){
+        findPopular.title = findPopular.tempTitle;
+        findPopular.isEdit = false;
+      }
+      setPopular(copyPopulars);
+    }
+    }
+
+
 
   useEffect(() => {
     initData();
@@ -117,10 +226,10 @@ function Main() {
     <>
       <div className="Mainbody">
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <MovieList tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput} isEdit={isEdit} editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
-            <MovieList tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput} isEdit={isEdit} editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
-            <MovieList tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput} isEdit={isEdit} editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
-            <MovieList tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput} isEdit={isEdit} editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
+            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
+            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
+            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
+            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from "react";
 import DramaItem from "./DramaItems";
 
-const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput}) =>{
+const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId, deleteItem}) =>{
     return(
     <>
     <h1>{subTitle}</h1>
@@ -21,6 +21,8 @@ const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput}) =>{
           editItem={editItem}
           doneEdit={doneEdit}
           onChangeInput={onChangeInput}
+          editId={editId}
+          deleteItem={deleteItem}
         />
         )}
         </ul>

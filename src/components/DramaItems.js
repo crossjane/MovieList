@@ -1,15 +1,15 @@
 import React from "react";
 
-const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit}) => {
+const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit, editId, deleteItem}) => {
     return(   
         <li className="movieList-li">
-            { isEdit?
+            { isEdit&&editId ===id ?
             <>
                 <input
                 value={tempTitle}
                 onChange={onChangeInput}               
                 />     
-                <button onClick={() => doneEdit()}>완료료</button><br/>
+                <button onClick={() => doneEdit()}>완료</button><br/>
             </>
             :
             <>
@@ -28,7 +28,7 @@ const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, e
             <p>방영 시작: {first_air_date}</p>
             <p>관객 평: {vote_average}</p>
             <p>{overview}</p>
-            <button >삭제</button>
+            <button onClick={()=>deleteItem(id)}>삭제</button>
         </div>
         </li>
         )} ;  

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import MovieItem from "./MovieItem";
 
-const MovieList = ({subTitle, movies, deleteItem, editItem, isEdit, onChangeInput, doneEditItem, tempTitle, division})=>{
+const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editId, doneEditItem, division})=>{
     return (
         <Fragment>
         <h1>{subTitle}</h1>
@@ -27,11 +27,12 @@ const MovieList = ({subTitle, movies, deleteItem, editItem, isEdit, onChangeInpu
                   deleteItem ={deleteItem}
                   id={movie.id}
                   editItem={editItem}
-                  isEdit={isEdit}
+                  isEdit={movie.isEdit}
                   onChangeInput={onChangeInput}
                   doneEditItem={doneEditItem}
-                  tempTitle={tempTitle}
+                  tempTitle={movie.tempTitle}
                   division={division}
+                  editId={editId}
                   />
                 ))}
               </ul>

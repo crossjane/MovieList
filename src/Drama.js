@@ -14,6 +14,7 @@ function Drama(){
     const [tempTitle, setTempTitle] = useState("");
     const [editId, setEditId] = useState();
   
+
     async function initData() {
       const result = await fetch(
         "https://api.themoviedb.org/3/tv/airing_today",
@@ -21,6 +22,8 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
+            Authorization : 
+               `Bearer ${process.env.REACT_API_KEY}`,
           },
         }
        )
@@ -36,7 +39,9 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-        },
+            Authorization : 
+               `Bearer ${process.env.REACT_API_KEY}`,
+          },
         }
        )
        const data = await result.json();
@@ -50,7 +55,9 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-                 },
+            Authorization : 
+               `Bearer ${process.env.REACT_API_KEY}`,
+          },
         }
        )
        const data = await result.json();
@@ -64,7 +71,9 @@ function Drama(){
           method: 'GET',
           headers:{
            "Content-Type" :"application/json",
-         },
+            Authorization : 
+               `Bearer ${process.env.REACT_API_KEY}`,
+          },
         }
        )
        const data = await result.json();
@@ -72,25 +81,34 @@ function Drama(){
     }
 
     function editItem(id, name){
-      console.log("editItem called for id:", id);
       setIsEdit(true);
       setEditId(id);
       setTempTitle(name);
-      console.log("isEdit:", isEdit);
     }
 
     function onChangeInput(e){
       setTempTitle(e.target.value);
     }
 
-    function doneEdit(){
-
+    function doneEdit(id){
+    
     }
 
-    // function deleteItem(id){
-    //   const filteredItem = airingToday.filter((dramas)=> dramas.id !== id);
-    //   setAiringToday(filteredItem);
-    // }
+    function deleteItem(id, division){
+        if(division === airingToday){
+        const filteredItem = airingToday.filter((dramas)=> dramas.id !== id);
+        setAiringToday(filteredItem);
+      } else if(division === onTheAir){
+        const filteredItem = onTheAir.filter((dramas)=> dramas.id !== id);
+        setAiringToday(filteredItem);
+      } else if(division === popular){
+        const filteredItem = popular.filter((dramas)=> dramas.id !== id);
+        setAiringToday(filteredItem);
+      } else if(division === topRated){
+        const filteredItem = topRated.filter((dramas)=> dramas.id !== id);
+        setAiringToday(filteredItem);
+      } 
+    }
 
 
     useEffect(() => {
@@ -103,13 +121,13 @@ function Drama(){
     return(
     <>
     <div className='MainGrid'>
-      <DramaList doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
+      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
         
-      <DramaList doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
+      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
 
-      <DramaList doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
+      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
 
-      <DramaList doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
+      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
       
     </div>
     </>

@@ -9,11 +9,12 @@ const MovieItem = ({
     id, 
     deleteItem, 
     editItem, 
-    isEdit, 
     onChangeInput, 
     doneEditItem,
     tempTitle,
-    division
+    division,
+    editId,
+    isEdit
 })=> {
     return (
 
@@ -35,16 +36,16 @@ const MovieItem = ({
             <>
                 <input 
                     value={tempTitle}
-                    onChange={onChangeInput}
+                    onChange={(event) => onChangeInput(event, id, division)}
                 />
-                <button onClick={()=>doneEditItem(id)}>완료</button>
+                <button onClick={()=>doneEditItem(id, division)}>완료</button>
 
             </>
                 
               ) : (
                 <>
              <p>{title}</p>
-             <button onClick={( ) => editItem(id, title)} >수정</button>
+             <button onClick={( ) => editItem(id, title, division)} >수정</button>
              </>
                      ) 
             }           
