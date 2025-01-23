@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { useState } from "react";
-import MovieItem from "./components/MovieItem";
 import MovieList from "./components/MovieList";
 import "./App.css";
 
@@ -10,9 +9,6 @@ function Main() {
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
-  const [tempTitle, setTempTitle] = useState("");
-  const [editId, setEditId] = useState();
 
   async function initData() {
     const result = await fetch(
@@ -226,10 +222,10 @@ function Main() {
     <>
       <div className="Mainbody">
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
-            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
-            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
-            <MovieList editId={editId} tempTitle={tempTitle} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
+            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
+            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
+            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
+            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
         </div>
       </div>
     </>

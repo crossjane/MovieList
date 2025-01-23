@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import DramaItem from './components/DramaItems';
 import DramaList from './components/DramaList';
 
 
@@ -12,7 +11,7 @@ function Drama(){
     const [topRated, setTopRated] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
     const [tempTitle, setTempTitle] = useState("");
-    const [editId, setEditId] = useState();
+    const [_, setEditId] = useState();
   
 
     async function initData() {

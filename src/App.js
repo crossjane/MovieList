@@ -1,6 +1,6 @@
 
 import './App.css';
-import {Router, Routes, Route, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Drama from './Drama';
