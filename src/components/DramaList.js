@@ -1,7 +1,7 @@
 import React from "react";
 import DramaItem from "./DramaItems";
 
-const DramaList = ({subTitle, dramas}) =>{
+const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput}) =>{
     return(
     <>
     <h1>{subTitle}</h1>
@@ -17,6 +17,10 @@ const DramaList = ({subTitle, dramas}) =>{
           first_air_date={drama.first_air_date}
           vote_average={drama.vote_average}
           overview={drama.overview}
+          id={drama.id}
+          editItem={editItem}
+          doneEdit={doneEdit}
+          onChangeInput={onChangeInput}
         />
         )}
         </ul>

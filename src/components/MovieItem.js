@@ -6,7 +6,7 @@ const MovieItem = ({
     release_date, 
     vote_average, 
     overview, 
-    index, 
+    id, 
     deleteItem, 
     editItem, 
     isEdit, 
@@ -17,8 +17,9 @@ const MovieItem = ({
 })=> {
     return (
 
+
         <li className="movieList-li">
-            <button onClick={()=>deleteItem(index, division)}>삭제</button>
+            <button onClick={()=>deleteItem(id, division)}>삭제</button>
             <img
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt={title}
@@ -36,23 +37,17 @@ const MovieItem = ({
                     value={tempTitle}
                     onChange={onChangeInput}
                 />
-                <button onClick={doneEditItem}>완료</button>
+                <button onClick={()=>doneEditItem(id)}>완료</button>
 
             </>
                 
               ) : (
                 <>
              <p>{title}</p>
-             <button onClick={( ) => editItem(index, title)} >수정</button>
+             <button onClick={( ) => editItem(id, title)} >수정</button>
              </>
                      ) 
-            }
-
-            
-            
-           
-
-            
+            }           
             <p>개봉 일자: {release_date}</p>
             <p>관객 평: {vote_average}</p>
             <p>{overview}</p>

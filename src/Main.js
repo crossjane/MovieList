@@ -11,7 +11,7 @@ function Main() {
   const [upcoming, setUpcoming] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempTitle, setTempTitle] = useState("");
-  const [editIndex, setEditIndex] = useState();
+  const [editId, setEditId] = useState();
 
   async function initData() {
     const result = await fetch(
@@ -20,7 +20,7 @@ function Main() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          },
+        },
       }
     );
     const data = await result.json();
@@ -32,7 +32,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-           },
+      },
     });
     const data = await result.json();
     setPopular(data.results);
@@ -43,7 +43,7 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-         },
+          },
     });
     const data = await result.json();
     setTopRated(data.results);
@@ -54,42 +54,54 @@ function Main() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-         },
+       },
     });
     const data = await result.json();
     setUpcoming(data.results);
   }
 
-  function deleteItem(index, division){
+  function deleteItem(id, division){
     if(division === "upcoming") {
-      const filteredUpcoming = upcoming.filter((_, i) => i !== index);
+      const filteredUpcoming = upcoming.filter((movie) => movie.id !== id);
     setUpcoming(filteredUpcoming);
     } else if(division === "nowPlayings"){
-      const filteredNowplayings = nowPlayings.filter((_, i) => i !== index);
+      const filteredNowplayings = nowPlayings.filter((movie) => movie.id !== id);
       setNowPlayings(filteredNowplayings);
     } else if(division === "topRated"){
-      const filteredTopRated = topRated.filter((_, i) => i !== index);
+      const filteredTopRated = topRated.filter((movie) => movie.id !== id);
       setTopRated(filteredTopRated);
     } else if(division === "popular"){
-      const filteredPopular = popular.filter((_, i) => i !== index);
+      const filteredPopular = popular.filter((movie) => movie.id !== id);
       setPopular(filteredPopular);
     }
   }
 
 
-  function editItem(index, title){
-    setIsEdit(true);
-    setEditIndex(index); 
+  function editItem(id,title){
+    console.log("1221");
+    const copyNowplayings =[...nowPlayings];
+    const updatedNowplayings = copyNowplayings.map((movie) => movie.id === id ?
+    {...movie, isEdit: true}
+  : {...movie, isEdit: false} 
+  );
+   setNowPlayings(updatedNowplayings);
+    setEditId(id);
     setTempTitle(title);
+    
+ 
   }
 
   function onChangeInput(event){
     setTempTitle(event.target.value);
   }
 
-  function doneEditItem(index){
+
+  function doneEditItem(id){
     const copyNowplayings = [...nowPlayings];
-    copyNowplayings[index].title = tempTitle;
+    const findIndex= copyNowplayings.findIndex((movie) => movie.id === id);
+    if(findIndex !== -1){
+      copyNowplayings[findIndex].title = tempTitle;
+    }
     setNowPlayings(copyNowplayings);
     setIsEdit(false);
   }
