@@ -9,6 +9,7 @@ function Main() {
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+  
 
   async function initData() {
     const result = await fetch(

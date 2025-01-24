@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import DramaItem from './components/DramaItems';
 import DramaList from './components/DramaList';
 
 
@@ -11,9 +12,10 @@ function Drama(){
     const [topRated, setTopRated] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
     const [tempTitle, setTempTitle] = useState("");
-    const [_, setEditId] = useState();
+    const [editId, setEditId] = useState();
   
 
+    
     async function initData() {
       const result = await fetch(
         "https://api.themoviedb.org/3/tv/airing_today",
@@ -22,7 +24,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_APP_API_KEY}`,
+               `Bearer ${process.env.REACT_API_KEY}`,
           },
         }
        )
@@ -39,7 +41,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_APP_API_KEY}`,
+               `Bearer ${process.env.REACT_API_KEY}`,
           },
         }
        )
@@ -55,7 +57,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_APP_API_KEY}`,
+               `Bearer ${process.env.REACT_API_KEY}`,
           },
         }
        )
@@ -71,7 +73,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_APP_API_KEY}`,
+               `Bearer ${process.env.REACT_API_KEY}`,
           },
         }
        )
@@ -120,6 +122,7 @@ function Drama(){
     return(
     <>
     <div className='MainGrid'>
+      <div style={{ display: "flex", flexDirection: "column" }}>
       <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
         
       <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
@@ -127,7 +130,7 @@ function Drama(){
       <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
 
       <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
-      
+      </div> 
     </div>
     </>
 
