@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import DramaItem from './components/DramaItems';
 import DramaList from './components/DramaList';
 
 
@@ -24,7 +23,7 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
+            `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         }
        )
@@ -41,8 +40,8 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
-          },
+            `Bearer ${process.env.REACT_APP_API_KEY}`,
+           },
         }
        )
        const data = await result.json();
@@ -57,8 +56,8 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
-          },
+            `Bearer ${process.env.REACT_APP_API_KEY}`,
+                    },
         }
        )
        const data = await result.json();
@@ -73,8 +72,8 @@ function Drama(){
           headers:{
            "Content-Type" :"application/json",
             Authorization : 
-               `Bearer ${process.env.REACT_API_KEY}`,
-          },
+            `Bearer ${process.env.REACT_APP_API_KEY}`,
+                   },
         }
        )
        const data = await result.json();

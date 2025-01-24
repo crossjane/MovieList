@@ -25,10 +25,11 @@ const MovieItem = ({
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt={title}
                 style={{
-                width: "500px",
+                width: "300px",
                 aspectRatio: 1,
                 borderRadius: "8px",
                 marginTop: "20px",
+                height: "450px"
                 }}
             />
 

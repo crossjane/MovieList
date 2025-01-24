@@ -22,7 +22,12 @@ const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, e
             <img 
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
             alt={name}
-            style={{ width: '50%', borderRadius: '8px' , marginTop: '20px'}}
+            style={{ 
+                width: "300px",
+                borderRadius: '8px' , 
+                marginTop: '20px',
+                height:"450px",
+            }}
             />
         <div className='textContainer'>
             <p>방영 시작: {first_air_date}</p>

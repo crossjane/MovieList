@@ -29,12 +29,13 @@ body {
 
 
 .movieList{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  */
   gap: 20px; 
   padding: 0;
   list-style-type: none; 
-  margin: 50px 0 0 0 
+  margin: 50px 0 0 0 ;
+  
 }
 
 .movieList-li{
@@ -44,6 +45,8 @@ body {
   background-color: #f9f9f9;
   text-align: center;
   list-style-type: none; 
+
+ 
  
 }
 

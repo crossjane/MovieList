@@ -8,7 +8,17 @@ const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId,
 
     { dramas&&dramas.length > 0 ? 
      (
-        <ul className="movieList">
+        <ul 
+        style={{
+          display:"flex",
+          flexDirection:"row",
+          overflowX:"scroll",
+          padding: 0,
+          gap: "20px",
+          }}
+          className="movieList"
+          >
+            
         {dramas.map((drama,index) =>  
         <DramaItem 
           key={index}
