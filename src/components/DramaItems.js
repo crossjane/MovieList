@@ -3,6 +3,10 @@ import React from "react";
 const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit, editId, deleteItem}) => {
     return(   
         <li className="movieList-li">
+            <input
+                type="checkbox"
+                className="checkbox"  
+            />
             { isEdit&&editId ===id ?
             <>
                 <input

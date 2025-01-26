@@ -12,6 +12,8 @@ function Drama(){
     const [isEdit, setIsEdit] = useState(false);
     const [tempTitle, setTempTitle] = useState("");
     const [editId, setEditId] = useState();
+    const [checkboxId, setCheckboxId] = useState();
+    const [isChecked, setIsChecked] = useState(false);
   
 
     
@@ -110,6 +112,18 @@ function Drama(){
       } 
     }
 
+    function clickCheckbox(){
+      setIsChecked(true);
+    }
+
+    function checkboxDelete(id){
+     
+      if(isChecked && id === checkboxId){
+
+      }
+
+    }
+
 
     useEffect(() => {
       initData();
@@ -122,13 +136,14 @@ function Drama(){
     <>
     <div className='MainGrid'>
       <div style={{ display: "flex", flexDirection: "column" }}>
-      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
         
-      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
+      <DramaList checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
+       
+      <DramaList checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
 
-      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
+      <DramaList checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
 
-      <DramaList deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
+      <DramaList checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
       </div> 
     </div>
     </>

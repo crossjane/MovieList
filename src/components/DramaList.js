@@ -1,10 +1,12 @@
 import React from "react";
 import DramaItem from "./DramaItems";
 
-const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId, deleteItem}) =>{
+const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId, deleteItem, checkboxDelete, checboxId}) =>{
     return(
     <>
     <h1>{subTitle}</h1>
+   
+    <button onClick={()=>checkboxDelete()}>삭제</button>
 
     { dramas&&dramas.length > 0 ? 
      (
