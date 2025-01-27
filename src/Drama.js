@@ -117,11 +117,8 @@ function Drama(){
     }
 
     function checkboxDelete(id){
-     
       if(isChecked && id === checkboxId){
-
       }
-
     }
 
 
