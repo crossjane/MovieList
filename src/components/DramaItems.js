@@ -1,13 +1,14 @@
 import React from "react";
 
-const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit, editId, deleteItem}) => {
+const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit, editId, deleteItem, clickCheckbox}) => {
     return(   
         <li className="movieList-li">
             <input
                 type="checkbox"
                 className="checkbox"  
+                onClick={()=>clickCheckbox()}
             />
-            { isEdit&&editId ===id ?
+            { isEdit && editId === id ?
             <>
                 <input
                 value={tempTitle}
