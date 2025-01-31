@@ -113,13 +113,19 @@ function Drama(){
     }
 
     function clickCheckbox(id){
-      setIsChecked(true);
+      if(isChecked===true){
+        setIsChecked(false);
+      }else {
+        setIsChecked(true);
+      }
       setCheckboxId(id);
     }
 
-    function checkboxDelete(id){
-      const deletedAiringToday = airingToday.filter((_,id) => isChecked && id === checkboxId );
+    function checkboxDelete(){
+      const deletedAiringToday = airingToday.filter((drama) => isChecked && drama.id !== checkboxId );
       setAiringToday(deletedAiringToday);
+      setCheckboxId();
+      setIsChecked(false);
       
     }
 

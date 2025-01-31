@@ -1,7 +1,7 @@
 import React from "react";
 import DramaItem from "./DramaItems";
 
-const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId, deleteItem, checkboxDelete, checboxId}) =>{
+const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId, deleteItem, checkboxDelete, checboxId, clickCheckbox}) =>{
     return(
     <>
     <h1>{subTitle}</h1>
@@ -35,6 +35,7 @@ const DramaList = ({subTitle, dramas, editItem, doneEdit, onChangeInput, editId,
           onChangeInput={onChangeInput}
           editId={editId}
           deleteItem={deleteItem}
+          clickCheckbox={clickCheckbox}
         />
         )}
         </ul>

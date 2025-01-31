@@ -6,7 +6,7 @@ const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, e
             <input
                 type="checkbox"
                 className="checkbox"  
-                onClick={()=>clickCheckbox()}
+                onClick={()=>clickCheckbox(id)}
             />
             { isEdit && editId === id ?
             <>
