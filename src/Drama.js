@@ -126,6 +126,9 @@ function Drama(){
       setAiringToday(deletedAiringToday);
       setCheckboxId();
       setIsChecked(false);
+
+      console.log(checkboxId);
+      console.log(isChecked);
       
     }
 
