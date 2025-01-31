@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import MovieItem from "./MovieItem";
 
-const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editId, doneEditItem, division})=>{
+const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editId, doneEditItem, division, checkboxDelete, clickCheckbox})=>{
     return (
         <Fragment>
         <h1>{subTitle}</h1>
+        <button onClick={()=>checkboxDelete()}>삭제</button>
         {
             movies&&movies.length > 0? (
                 <ul
@@ -33,6 +34,7 @@ const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editI
                   tempTitle={movie.tempTitle}
                   division={division}
                   editId={editId}
+                  clickCheckbox={clickCheckbox}
                   />
                 ))}
               </ul>

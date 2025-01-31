@@ -28,6 +28,7 @@ function Main() {
     for(let i = 0; i < data.results.length; i++){
        data.results[i].isEdit = false;
        data.results[i].tempTitle = "";
+       data.results[i].isChecked = false;
      }
     setNowPlayings(data.results);
 
@@ -47,6 +48,7 @@ function Main() {
     for(let i = 0; i < data.results.length; i++){
       data.results[i].isEdit = false;
       data.results[i].tempTitle = "";
+      data.results[i].isChecked = false;
     }
     setPopular(data.results);
   }
@@ -64,6 +66,7 @@ function Main() {
     for(let i = 0; i < data.results.length; i++){
       data.results[i].isEdit = false;
       data.results[i].tempTitle = "";
+      data.results[i].isChecked = false;
     }
     setTopRated(data.results);
   }
@@ -81,6 +84,7 @@ function Main() {
     for(let i = 0; i < data.results.length; i++){
       data.results[i].isEdit = false;
       data.results[i].tempTitle = "";
+      data.results[i].isChecked = false;
     }
     setUpcoming(data.results);
   }
@@ -175,40 +179,59 @@ function Main() {
 
 
   function doneEditItem(id, division){
-    if(division === "upcoming"){
-      const copyUpcomings =[...upcoming];
-      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
-      if(findUpcoming){
-        findUpcoming.title = findUpcoming.tempTitle;
-        findUpcoming.isEdit = false;
+      if(division === "upcoming"){
+        const copyUpcomings =[...upcoming];
+        const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+        if(findUpcoming){
+          findUpcoming.title = findUpcoming.tempTitle;
+          findUpcoming.isEdit = false;
+        }
+        setUpcoming(copyUpcomings);
+    } else if (division === "nowPlayings"){
+        const copyNowplayings =[...nowPlayings];
+        const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+        if(findNowplayings){
+          findNowplayings.title = findNowplayings.tempTitle;
+          findNowplayings.isEdit = false;
+        }
+        setNowPlayings(copyNowplayings);
+    } else if (division === "topRated"){
+        const copyTopRated =[...topRated];
+        const findTopRated = copyTopRated.find((movie) => movie.id === id);
+        if(findTopRated){
+          findTopRated.title = findTopRated.tempTitle;
+          findTopRated.isEdit = false;
+        }
+        setTopRated(copyTopRated);
+      } else if (division === "popular"){
+        const copyPopulars =[...popular];
+        const findPopular = copyPopulars.find((movie) => movie.id === id);
+        if(findPopular){
+          findPopular.title = findPopular.tempTitle;
+          findPopular.isEdit = false;
+        }
+        setPopular(copyPopulars);
+      }
+    }
+
+
+    function clickCheckbox(id){
+      const copyUpcomings= [...upcoming];
+      const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
+      if(!findUpcoming.isChecked){
+        findUpcoming.isChecked = true;
+      } else {
+        findUpcoming.isChecked= false;
       }
       setUpcoming(copyUpcomings);
-   } else if (division === "nowPlayings"){
-      const copyNowplayings =[...nowPlayings];
-      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
-      if(findNowplayings){
-        findNowplayings.title = findNowplayings.tempTitle;
-        findNowplayings.isEdit = false;
-      }
-      setNowPlayings(copyNowplayings);
-   } else if (division === "topRated"){
-      const copyTopRated =[...topRated];
-      const findTopRated = copyTopRated.find((movie) => movie.id === id);
-      if(findTopRated){
-        findTopRated.title = findTopRated.tempTitle;
-        findTopRated.isEdit = false;
-      }
-      setTopRated(copyTopRated);
-    } else if (division === "popular"){
-      const copyPopulars =[...popular];
-      const findPopular = copyPopulars.find((movie) => movie.id === id);
-      if(findPopular){
-        findPopular.title = findPopular.tempTitle;
-        findPopular.isEdit = false;
-      }
-      setPopular(copyPopulars);
+    
     }
+
+    function checkboxDelete(){
+      const filteredUpcoming = upcoming.filter((movie) => !movie.isChecked);
+      setUpcoming(filteredUpcoming);
     }
+
 
 
 
@@ -223,10 +246,10 @@ function Main() {
     <>
       <div className="Mainbody">
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
-            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
-            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
-            <MovieList  doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
         </div>
       </div>
     </>

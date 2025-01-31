@@ -14,13 +14,20 @@ const MovieItem = ({
     tempTitle,
     division,
     editId,
-    isEdit
+    isEdit,
+    clickCheckbox,
 })=> {
     return (
 
 
         <li className="movieList-li">
             <button onClick={()=>deleteItem(id, division)}>삭제</button>
+            <input
+                type="checkbox"
+                className="checkbox"
+                onChange={()=>clickCheckbox(id)}
+            
+            />
             <img
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt={title}
