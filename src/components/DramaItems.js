@@ -1,6 +1,22 @@
 import React from "react";
 
-const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, editItem, id, onChangeInput, isEdit, tempTitle, doneEdit, editId, deleteItem, clickCheckbox}) => {
+const DramaItem = ({
+        name,
+        poster_path, 
+        first_air_date, 
+        vote_average, 
+        overview, 
+        editItem, 
+        id, 
+        onChangeInput, 
+        isEdit, 
+        tempName, 
+        doneEdit, 
+        editId, 
+        deleteItem, 
+        clickCheckbox,
+        division
+        }) => {
     return(   
         <li className="movieList-li">
             <input
@@ -8,19 +24,20 @@ const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, e
                 className="checkbox"  
                 onClick={()=>clickCheckbox(id)}
             />
-            { isEdit && editId === id ?
+            { isEdit ?(
             <>
                 <input
-                value={tempTitle}
-                onChange={onChangeInput}               
+                value={tempName}
+                onChange={(e) => onChangeInput (e, id, division)}               
                 />     
-                <button onClick={() => doneEdit()}>완료</button><br/>
+                <button onClick={() => doneEdit(id, division)}>완료</button><br/>
             </>
-            :
+             ) : (
             <>
                 <p>{name}</p>
-                <button onClick={() => editItem(id)}>수정</button><br/>
+                <button onClick={() => editItem(id, name, division)}>수정</button><br/>
             </>
+             )
             }
             
             
@@ -38,7 +55,7 @@ const DramaItem = ({name, poster_path, first_air_date, vote_average, overview, e
             <p>방영 시작: {first_air_date}</p>
             <p>관객 평: {vote_average}</p>
             <p>{overview}</p>
-            <button onClick={()=>deleteItem(id)}>삭제</button>
+            <button onClick={()=>deleteItem(id, division)}>삭제</button>
         </div>
         </li>
         )} ;  

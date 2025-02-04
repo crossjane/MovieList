@@ -1,7 +1,17 @@
 import React, { Fragment } from "react";
 import MovieItem from "./MovieItem";
 
-const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editId, doneEditItem, division, checkboxDelete, clickCheckbox})=>{
+const MovieList = ({subTitle, 
+      movies, 
+      deleteItem, 
+      editItem, 
+      onChangeInput, 
+      editId, 
+      doneEditItem, 
+      division, 
+      checkboxDelete, 
+      clickCheckbox
+    })=>{
     return (
         <Fragment>
         <h1>{subTitle}</h1>
@@ -35,6 +45,7 @@ const MovieList = ({subTitle, movies, deleteItem, editItem, onChangeInput, editI
                   division={division}
                   editId={editId}
                   clickCheckbox={clickCheckbox}
+                  isChecked={movie.isChecked}
                   />
                 ))}
               </ul>

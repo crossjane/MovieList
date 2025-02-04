@@ -16,6 +16,7 @@ const MovieItem = ({
     editId,
     isEdit,
     clickCheckbox,
+    isChecked
 })=> {
     return (
 
@@ -26,7 +27,7 @@ const MovieItem = ({
                 type="checkbox"
                 className="checkbox"
                 onChange={()=>clickCheckbox(id)}
-            
+                checked={isChecked}
             />
             <img
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}

@@ -9,14 +9,8 @@ function Drama(){
     const [onTheAir, setOnTheAir] = useState([]);
     const [popular, setPopular] = useState([]);
     const [topRated, setTopRated] = useState([]);
-    const [isEdit, setIsEdit] = useState(false);
-    const [tempTitle, setTempTitle] = useState("");
-    const [editId, setEditId] = useState();
-    const [checkboxId, setCheckboxId] = useState();
-    const [isChecked, setIsChecked] = useState(false);
-  
 
-    
+
     async function initData() {
       const result = await fetch(
         "https://api.themoviedb.org/3/tv/airing_today",
@@ -30,7 +24,11 @@ function Drama(){
         }
        )
        const data = await result.json();
-       //data가 객체?results?
+       for(let i = 0; i < data.results.length; i++){
+        data.results[i].isEdit = false;
+        data.results[i].tempName = "";
+        data.results[i].isChecked = false;
+       }
        setAiringToday(data.results);
     }
 
@@ -47,6 +45,11 @@ function Drama(){
         }
        )
        const data = await result.json();
+       for(let i = 0; i < data.results.length; i++){
+        data.results[i].isEdit = false;
+        data.results[i].tempName = "";
+        data.results[i].isChecked = false;
+       }
        setOnTheAir(data.results);
     }
 
@@ -63,6 +66,11 @@ function Drama(){
         }
        )
        const data = await result.json();
+       for(let i = 0; i < data.results.length; i++){
+        data.results[i].isEdit = false;
+        data.results[i].tempName = "";
+        data.results[i].isChecked = false;
+       }
        setPopular(data.results);
     }
 
@@ -79,21 +87,128 @@ function Drama(){
         }
        )
        const data = await result.json();
+       for(let i = 0; i < data.results.length; i++){
+        data.results[i].isEdit = false;
+        data.results[i].tempName = "";
+        data.results[i].isChecked = false;
+       }
        setTopRated(data.results);
     }
 
-    function editItem(id, name){
-      setIsEdit(true);
-      setEditId(id);
-      setTempTitle(name);
-    }
+    function editItem(id, name, division){
+      console.log("editItem");
 
-    function onChangeInput(e){
-      setTempTitle(e.target.value);
-    }
+        if(division === "airingToday"){
+          const copyAiringToday = [...airingToday];
+          const findAiringToday = copyAiringToday.find((drama) => drama.id === id);
+          if(findAiringToday){
+            findAiringToday.isEdit = true;
+            findAiringToday.tempName = name;
+          }
+          setAiringToday(copyAiringToday);
 
-    function doneEdit(id){
-    
+        } else if(division === "onTheAir"){
+          const copyOnTheAir = [...onTheAir];
+          const findOnTheAir = copyOnTheAir.find((drama) => drama.id === id);
+          if(findOnTheAir){
+            findOnTheAir.isEdit = true;
+            findOnTheAir.tempName = name;
+          }
+          setOnTheAir(copyOnTheAir);
+      
+
+        } else if(division === "popular"){
+        const copyPopulars = [...popular];
+        const findPopular = copyPopulars.find((drama) => drama.id === id);
+        if(findPopular){
+          findPopular.isEdit = true;
+          findPopular.tempName = name;
+        }
+        
+        setPopular(copyPopulars);
+        }else if(division === "topRated"){
+          const copyTopRated = [...topRated];
+          const findTopRated = copyTopRated.find((drama) => drama.id === id);
+          if(findTopRated){
+            findTopRated.isEdit = true;
+            findTopRated.tempName = name;
+          }
+          setTopRated(copyTopRated);
+        }
+      }
+
+
+    function onChangeInput(e, id, division){
+      if(division === "airingToday"){
+          const copyAiringToday = [...airingToday];
+          const findAiringToday = airingToday.find((drama)=> drama.id === id);
+          if(findAiringToday){
+            findAiringToday.tempName = e.target.value;
+          }
+          setAiringToday(copyAiringToday);
+        } else if(division === "onTheAir"){
+          const copyOnTheAir = [...onTheAir];
+          const findOnTheAir = onTheAir.find((drama)=> drama.id === id);
+          if(findOnTheAir){
+            findOnTheAir.tempName = e.target.value;
+          }
+          setOnTheAir(copyOnTheAir);
+        } else if(division === "popular"){
+          const copyPopulars = [...popular];
+          const findPopulars = popular.find((drama)=> drama.id === id);
+          if(findPopulars){
+            findPopulars.tempName = e.target.value;
+          }
+          setAiringToday(copyPopulars);
+        } else if(division === "topRated"){
+          const copyTopRated = [...topRated];
+          const findTopRated = topRated.find((drama)=> drama.id === id);
+          if(findTopRated){
+            findTopRated.tempName = e.target.value;
+          }
+          setTopRated(copyTopRated);
+        } 
+
+      }
+
+    function doneEdit(id, division){
+      if(division === "airingToday"){
+        const copyAiringToday = [...airingToday];
+        const findAiringToday = airingToday.find((drama)=> drama.id === id);
+        if(airingToday){
+          findAiringToday.name = findAiringToday.tempName;
+          findAiringToday.isEdit = false;
+        }
+        setAiringToday(copyAiringToday);
+      
+      }else if(division === "onTheAir"){
+        const copyOnTheAir = [...onTheAir];
+        const findOnTheAir = onTheAir.find((drama)=> drama.id === id);
+        if(onTheAir){
+          findOnTheAir.name = findOnTheAir.tempName;
+          findOnTheAir.isEdit = false;
+        }
+        setAiringToday(copyOnTheAir);
+      
+      }else if(division === "popular"){
+        const copyPopulars = [...popular];
+        const findPopular = popular.find((drama)=> drama.id === id);
+        if(popular){
+          findPopular.name = findPopular.tempName;
+          findPopular.isEdit = false;
+        }
+        setAiringToday(copyPopulars);
+      
+      }else if(division === "topRated"){
+        const copyTopRated = [...topRated];
+        const findTopRated = topRated.find((drama)=> drama.id === id);
+        if(topRated){
+          findTopRated.name = findTopRated.tempName;
+          findTopRated.isEdit = false;
+        }
+        setAiringToday(copyTopRated);
+      
+      }
     }
 
     function deleteItem(id, division){
@@ -112,24 +227,60 @@ function Drama(){
       } 
     }
 
-    function clickCheckbox(id){
-      if(isChecked===true){
-        setIsChecked(false);
-      }else {
-        setIsChecked(true);
-      }
-      setCheckboxId(id);
+    function clickCheckbox(id, division){
+      if(division === airingToday){
+      const copyAiringToday=[...airingToday];
+      const findAiringToday = copyAiringToday.find((drama)=> drama.id === id);
+        if(!findAiringToday.isChecked){
+          findAiringToday.isChecked = true;
+        } else {
+          findAiringToday.isChecked = false;
+        }
+        setAiringToday(copyAiringToday);
+       }else if(division === onTheAir){
+        const copyOnTheAir=[...onTheAir];
+        const findOnTheAir = copyOnTheAir.find((drama)=> drama.id === id);
+          if(!findOnTheAir.isChecked){
+            findOnTheAir.isChecked = true;
+          } else {
+            findOnTheAir.isChecked = false;
+          }
+          setOnTheAir(copyOnTheAir);
+        }else if(division === popular){
+          const copyPopulars=[...popular];
+          const findPopular = copyPopulars.find((drama)=> drama.id === id);
+            if(!findPopular.isChecked){
+              findPopular.isChecked = true;
+            } else {
+              findPopular.isChecked = false;
+            }
+          setPopular(copyPopulars);
+        }else if(division === topRated){
+          const copyTopRated=[...topRated];
+          const findTopRated = copyTopRated.find((drama)=> drama.id === id);
+          if(!findTopRated.isChecked){
+            findTopRated.isChecked = true;
+          } else {
+            findTopRated.isChecked = false;
+          }
+        setTopRated(copyTopRated);
+     }
     }
 
-    function checkboxDelete(){
-      const deletedAiringToday = airingToday.filter((drama) => isChecked && drama.id !== checkboxId );
-      setAiringToday(deletedAiringToday);
-      setCheckboxId();
-      setIsChecked(false);
-
-      console.log(checkboxId);
-      console.log(isChecked);
-      
+    function checkboxDelete(division){
+      if(division === airingToday){
+        const deletedAiringToday = airingToday.filter((drama) => !drama.isChecked );
+        setAiringToday(deletedAiringToday);
+      } else if(division === onTheAir){
+        const deletedOnTheAir = onTheAir.filter((drama) => !drama.isChecked );
+        setOnTheAir(deletedOnTheAir);
+      } else if(division === popular){
+        const deletedPopular = popular.filter((drama) => !drama.isChecked );
+        setPopular(deletedPopular);
+      } else if(division === topRated){
+        const deletedTopRated = topRated.filter((drama) => !drama.isChecked );
+        setTopRated(deletedTopRated);
+      }
     }
 
 
@@ -145,13 +296,13 @@ function Drama(){
     <div className='MainGrid'>
       <div style={{ display: "flex", flexDirection: "column" }}>
         
-      <DramaList clickCheckbox={clickCheckbox} checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday}/>
+      <DramaList clickCheckbox={clickCheckbox} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"오늘 방영중"} dramas={airingToday} division={"airingToday"}/>
        
-      <DramaList clickCheckbox={clickCheckbox} checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir}/>
+      <DramaList clickCheckbox={clickCheckbox} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"방송 중"} dramas={onTheAir} division={"onTheAir"}/>
 
-      <DramaList clickCheckbox={clickCheckbox} checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular}/>
+      <DramaList clickCheckbox={clickCheckbox} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"인기 있는"} dramas={popular} division={"popular"}/>
 
-      <DramaList clickCheckbox={clickCheckbox} checkboxId={checkboxId} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} tempTitle={tempTitle} isEdit={isEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated}/>
+      <DramaList clickCheckbox={clickCheckbox} checkboxDelete={checkboxDelete} deleteItem={deleteItem} doneEdit={doneEdit} onChangeInput={onChangeInput} editItem={editItem} subTitle={"최고 평점"} dramas={topRated} division={"topRated"}/>
       </div> 
     </div>
     </>

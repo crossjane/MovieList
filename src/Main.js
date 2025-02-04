@@ -215,17 +215,22 @@ function Main() {
     }
 
 
-    function clickCheckbox(id){
-      const copyUpcomings= [...upcoming];
-      const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
-      if(!findUpcoming.isChecked){
-        findUpcoming.isChecked = true;
-      } else {
-        findUpcoming.isChecked= false;
+    function clickCheckbox(id, division){
+      if(division === upcoming){
+        const copyUpcomings= [...upcoming];
+        const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
+        if(!findUpcoming.isChecked){
+          findUpcoming.isChecked = true;
+        } else {
+          findUpcoming.isChecked= false;
+        }
+        setUpcoming(copyUpcomings);
       }
-      setUpcoming(copyUpcomings);
-    
-    }
+
+
+
+
+     }
 
     function checkboxDelete(){
       const filteredUpcoming = upcoming.filter((movie) => !movie.isChecked);
