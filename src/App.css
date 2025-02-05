@@ -1,7 +1,11 @@
 /* Header */
 body {
  color: #232323dd;
+ margin : 0 100px 200px 100px;
+ font-family: 'Noto Sans KR', sans-serif;
 }
+
+
 
 .category{
   display: flex;
@@ -29,27 +33,108 @@ body {
 
 
 .movieList{
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  */
-  gap: 20px; 
-  padding: 0;
-  list-style-type: none; 
-  margin: 50px 0 0 0 ;
+
+
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px;
+  margin: 0 0 0 0;
+  scroll-behavior: smooth; 
   
 }
+
 
 .movieList-li{
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
+  width:350px;
   background-color: #f9f9f9;
   text-align: center;
   list-style-type: none; 
 
- 
- 
 }
+
+
+
 
 .textContainer{
   text-align:left;
+}
+
+.delete-btn{
+  width: 50px;
+  margin-left: 20px;
+}
+
+.title-container{
+  margin-top: 15px;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.edit-btn{
+  margin-left: 10px;
+}
+
+.carousel-container{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  gap: 10px;
+
+}
+
+.division-container{
+  display: flex;
+  margin-left: 70px;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.scroll-btn {
+  background-color: rgba(241, 241, 241, 0.6);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 24px;
+  transition: 0.3s;
+  height: 50px; 
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.scroll-btn:hover {
+  background-color: #efeef4;
+
+}
+
+.scroll-btn img {
+  width: 20px; 
+  height: 20px; 
+}
+
+/* 스크롤바 */
+
+
+.movieList::-webkit-scrollbar {
+  height: 0; 
+}
+
+.movieList::-webkit-scrollbar-track {
+  background: #efeef4; 
+  border-radius: 10px; 
+  margin-left: 10px;
+}
+
+.movieList::-webkit-scrollbar-thumb {
+  background:  #c2b8d5;
+  border-radius: 10px;
 }

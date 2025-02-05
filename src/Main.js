@@ -216,7 +216,7 @@ function Main() {
 
 
     function clickCheckbox(id, division){
-      if(division === upcoming){
+      if(division === "upcoming"){
         const copyUpcomings= [...upcoming];
         const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
         if(!findUpcoming.isChecked){
@@ -225,6 +225,33 @@ function Main() {
           findUpcoming.isChecked= false;
         }
         setUpcoming(copyUpcomings);
+      }else if(division === "nowPlayings"){
+        const copyNowplayings= [...nowPlayings];
+        const findNowplayings = copyNowplayings.find((movie) =>movie.id === id  );
+        if(!findNowplayings.isChecked){
+          findNowplayings.isChecked = true;
+        } else {
+          findNowplayings.isChecked= false;
+        }
+        setNowPlayings(copyNowplayings);
+      }else if(division === "topRated"){
+        const copyTopRated= [...topRated];
+        const findTopRated = copyTopRated.find((movie) =>movie.id === id  );
+        if(!findTopRated.isChecked){
+          findTopRated.isChecked = true;
+        } else {
+          findTopRated.isChecked= false;
+        }
+        setTopRated(copyTopRated);
+      }else if(division === "popular"){
+        const copyPopulars= [...popular];
+        const findPopular = copyPopulars.find((movie) =>movie.id === id  );
+        if(!findPopular.isChecked){
+          findPopular.isChecked = true;
+        } else {
+          findPopular.isChecked= false;
+        }
+        setPopular(copyPopulars);
       }
 
 

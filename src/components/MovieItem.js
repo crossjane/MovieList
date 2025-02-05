@@ -20,13 +20,12 @@ const MovieItem = ({
 })=> {
     return (
 
-
         <li className="movieList-li">
-            <button onClick={()=>deleteItem(id, division)}>삭제</button>
+    
             <input
                 type="checkbox"
                 className="checkbox"
-                onChange={()=>clickCheckbox(id)}
+                onChange={()=>clickCheckbox(id, division)}
                 checked={isChecked}
             />
             <img
@@ -53,8 +52,10 @@ const MovieItem = ({
                 
               ) : (
                 <>
-             <p>{title}</p>
-             <button onClick={( ) => editItem(id, title, division)} >수정</button>
+             <div className="title-container">
+                <span>{title}</span>
+                <button className="edit-btn" onClick={( ) => editItem(id, title, division)} >수정</button>
+             </div>
              </>
                      ) 
             }           
