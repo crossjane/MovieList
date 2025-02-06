@@ -54,7 +54,9 @@ const MovieItem = ({
                 <>
              <div className="title-container">
                 <span>{title}</span>
-                <button className="edit-btn" onClick={( ) => editItem(id, title, division)} >수정</button>
+                <button className="edit-btn" onClick={( ) => editItem(id, title, division)} >
+                    <img src="/img/edit_btn.svg" alt="Edit-btn"/>
+                </button>
              </div>
              </>
                      ) 

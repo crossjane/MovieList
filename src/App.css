@@ -1,8 +1,13 @@
 /* Header */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lugrasimo&family=Meow+Script&display=swap');
+
 body {
- color: #232323dd;
+ color: white;
  margin : 0 100px 200px 100px;
  font-family: 'Noto Sans KR', sans-serif;
+ background-color: #201F27;
+
 }
 
 
@@ -13,7 +18,7 @@ body {
   gap: 20px;
   font-weight: 600;
   font-size: 18px;
-  color: #4f4f4f;
+  color: #ffffff;
 }
 
 .category li a {
@@ -23,7 +28,7 @@ body {
 }
 
 .category li a:hover {
-  color: rgb(119, 159, 227); 
+  color: #8f81eb; 
 }
 
 /* Main */
@@ -34,11 +39,10 @@ body {
 
 .movieList{
 
-
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  gap: 20px;
+  gap: 30px;
   padding: 10px;
   margin: 0 0 0 0;
   scroll-behavior: smooth; 
@@ -47,13 +51,16 @@ body {
 
 
 .movieList-li{
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 8px;
   padding: 16px;
-  width:350px;
-  background-color: #f9f9f9;
+  /* width:400px;
+  background-color: #35346C; */
+  background-color: #1E1F25;
   text-align: center;
   list-style-type: none; 
+  box-shadow: 0px 0px 8px rgba(220, 220, 220, 0.3);
+  height: 950px;
 
 }
 
@@ -65,19 +72,89 @@ body {
 }
 
 .delete-btn{
+  position: relative;
+  width: auto;  
+  height: auto; 
+  background: none; 
+  border: none; 
+  padding: 0; 
+  cursor: pointer; 
   width: 50px;
-  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.delete-btn:hover{
+  opacity: 0.8;
+}
+
+/* 삭제 버튼 툴팁팁 */
+.delete-btn::after {
+  content: "원하는 콘텐츠를 체크 하고 누르면 삭제됩니다.";  
+  position: absolute;
+  bottom: 120%;
+  left: 150px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  color: rgb(40, 40, 40);
+  padding: 6px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.delete-btn:hover::after {
+  opacity: 1;
 }
 
 .title-container{
+  display: flex;
   margin-top: 15px;
   font-weight: bolder;
   font-size: 18px;
+  text-align: center;
+  justify-content: center;
 }
 
 .edit-btn{
+  position: relative;
+  background: none; 
+  border: none; 
+  padding: 0; 
   margin-left: 10px;
+  margin-top: 0px;
 }
+
+.edit-btn:hover{
+  opacity: 0.8;
+}
+
+/* 수정정툴팁 */
+.edit-btn::after {
+  content: "제목을 수정할 수 있습니다.";  
+  position: absolute;
+  bottom: 120%;
+  left: 100px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  color: rgb(40, 40, 40);
+  padding: 6px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.edit-btn:hover::after {
+  opacity: 1;
+}
+
 
 .carousel-container{
   display: flex;
@@ -95,7 +172,7 @@ body {
 }
 
 .scroll-btn {
-  background-color: rgba(241, 241, 241, 0.6);
+  background-color: #3a366d5e;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -137,4 +214,53 @@ body {
 .movieList::-webkit-scrollbar-thumb {
   background:  #c2b8d5;
   border-radius: 10px;
+}
+
+
+/* 체크박스 */
+
+.checkbox {
+  width: 19px;  
+  height: 19px;
+  cursor: pointer;
+  appearance: none; 
+  border: 2px solid #999; 
+  border-radius: 4px;
+  background-color: white;
+  transition: 0.3s;
+  position: relative;
+}
+
+.checkbox:checked {
+  background-color: #6758C7; 
+  border: 2px solid #6758C7;
+}
+
+.checkbox:checked:hover {
+  background-color: #352f61;
+}
+
+.checkbox:checked::after {
+  content: "✔"; 
+  font-size: 14px;
+  color: white;
+  line-height: 18px; 
+  top:50%;
+  left:50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.nav-link{
+  font-size: 20px; 
+  text-decoration: none; 
+  color: white; 
+  transition: all 0.3s ease-in-out; 
+}
+
+
+.nav-link:hover {
+  font-size: 22px; 
+  font-weight: bold; 
+  color: #6758C7; 
 }

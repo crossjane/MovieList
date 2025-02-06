@@ -34,7 +34,9 @@ const MovieList = ({subTitle,
         <Fragment>
         <div className="division-container">
           <h1>{subTitle}</h1>
-          <button className="delete-btn" onClick={()=>checkboxDelete()}>삭제</button>
+          <button className="delete-btn" onClick={()=>checkboxDelete()}>
+            <img src="/img/delete_btn.svg" alt="Eelete" />
+          </button>
         </div>
 
         <div className="carousel-container">
