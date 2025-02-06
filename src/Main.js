@@ -9,11 +9,18 @@ function Main() {
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+
+  const [movies, setMovies] = useState({
+    nowPlayings:[],
+    popular:[],
+    topRated:[],
+    upcoming:[]
+  });
   
 
   async function initData() {
     const result = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing",
+      "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR",
       {
         method: "GET",
         headers: {
@@ -30,12 +37,16 @@ function Main() {
        data.results[i].tempTitle = "";
        data.results[i].isChecked = false;
      }
-    setNowPlayings(data.results);
+
+
+    return new Promise(function(resolve,reject){
+          resolve(data.results);
+    })
 
   }
 
   async function initData2() {
-    const result = await fetch("https://api.themoviedb.org/3/movie/popular", {
+    const result = await fetch("https://api.themoviedb.org/3/movie/popular?language=ko-KR", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -50,11 +61,15 @@ function Main() {
       data.results[i].tempTitle = "";
       data.results[i].isChecked = false;
     }
-    setPopular(data.results);
+
+    return new Promise(function(resolve, reject){
+        resolve(data.results);
+    })
+    
   }
 
   async function initData3() {
-    const result = await fetch("https://api.themoviedb.org/3/movie/top_rated", {
+    const result = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko-KR", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -68,11 +83,14 @@ function Main() {
       data.results[i].tempTitle = "";
       data.results[i].isChecked = false;
     }
-    setTopRated(data.results);
+
+    return new Promise(function(resolve,reject){
+        resolve(data.results);
+    })
   }
 
   async function initData4() {
-    const result = await fetch("https://api.themoviedb.org/3/movie/upcoming", {
+    const result = await fetch("https://api.themoviedb.org/3/movie/upcoming?language=ko-KR", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -86,62 +104,35 @@ function Main() {
       data.results[i].tempTitle = "";
       data.results[i].isChecked = false;
     }
-    setUpcoming(data.results);
+    return new Promise(function(resolve,reject){
+      resolve(data.results);
+    })
   }
 
   function deleteItem(id, division){
-    if(division === "upcoming") {
-      const filteredUpcoming = upcoming.filter((movie) => movie.id !== id);
-    setUpcoming(filteredUpcoming);
-    } else if(division === "nowPlayings"){
-      const filteredNowplayings = nowPlayings.filter((movie) => movie.id !== id);
-      setNowPlayings(filteredNowplayings);
-    } else if(division === "topRated"){
-      const filteredTopRated = topRated.filter((movie) => movie.id !== id);
-      setTopRated(filteredTopRated);
-    } else if(division === "popular"){
-      const filteredPopular = popular.filter((movie) => movie.id !== id);
-      setPopular(filteredPopular);
-    }
+    const filteredMovies = movies[division].filter((movie) => movie.id !== id);
+    const copyMoviess = {...movies}
+    copyMoviess[division] = filteredMovies
+    setMovies(copyMoviess);
   }
 
 
   //주소값이 기떄문에.. 참조해서 만 쓴것. 
   function editItem(id,title, division){
+    const copyMovies = {...movies};
+    const findMovieIndex = copyMovies[division].findIndex((movie) => movie.id === id);
+    if(findMovieIndex !== -1) {
+      const copyFindMovie = {...copyMovies[division][findMovieIndex]};
 
-    if(division === "upcoming"){
-      const copyUpcomings =[...upcoming];
-      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
-      if(findUpcoming){
-        findUpcoming.isEdit = true;
-        findUpcoming.tempTitle = title;
-      }
-      setUpcoming(copyUpcomings);
-   } else if (division === "nowPlayings"){
-      const copyNowplayings =[...nowPlayings];
-      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
-      if(findNowplayings){
-        findNowplayings.isEdit = true;
-        findNowplayings.tempTitle = title;
-      }
-      setNowPlayings(copyNowplayings);
-   } else if (division === "topRated"){
-      const copyTopRated =[...topRated];
-      const findTopRated = copyTopRated.find((movie) => movie.id === id);
-      if(findTopRated){
-        findTopRated.isEdit = true;
-        findTopRated.tempTitle = title;
-      }
-      setTopRated(copyTopRated);
-    } else if (division === "popular"){
-      const copyPopulars =[...popular];
-      const findPopular = copyPopulars.find((movie) => movie.id === id);
-      if(findPopular){
-        findPopular.isEdit = true;
-        findPopular.tempTitle = title;
-      }
-      setPopular(copyPopulars);
-  } 
+      copyFindMovie.isEdit = true;
+      copyFindMovie.tempTitle = title;
+      copyMovies[division][findMovieIndex] = copyFindMovie;
+      setMovies(copyMovies);
+    
+    }
+  
+
+   
   }
 
   function onChangeInput(event, id, division){
@@ -266,22 +257,37 @@ function Main() {
 
 
 
+  
+
+
+   async function init(){
+    const nowPlaying = await initData();
+    const popular = await initData2();
+    const topRated = await initData3();
+    const upcoming = await initData4();
+
+    const copyMovies = {...movies};
+    copyMovies.nowPlayings = nowPlaying;
+    copyMovies.popular = popular;
+    copyMovies.topRated = topRated;
+    copyMovies.upcoming = upcoming;
+
+    setMovies(copyMovies);
+   }
+
 
   useEffect(() => {
-    initData();
-    initData2();
-    initData3();
-    initData4();
+    init();
   }, []);
 
   return (
     <>
       <div className="Mainbody">
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={upcoming} division={"upcoming"}/> 
-            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={nowPlayings} division={"nowPlayings"}/> 
-            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={popular} division={"popular"} /> 
-            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={topRated} division={"topRated"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"상영예정 영화"} movies={movies.upcoming} division={"upcoming"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"이달의 영화"} movies={movies.nowPlayings} division={"nowPlayings"}/> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"유명한 영화"} movies={movies.popular} division={"popular"} /> 
+            <MovieList  checkboxDelete={checkboxDelete} clickCheckbox={clickCheckbox} doneEditItem={doneEditItem} onChangeInput={onChangeInput}  editItem={editItem} deleteItem={deleteItem} subTitle={"평점 높은 영화"} movies={movies.topRated} division={"topRated"}/> 
         </div>
       </div>
     </>
