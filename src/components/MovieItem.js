@@ -64,6 +64,7 @@ const MovieItem = ({
             <p>개봉 일자: {release_date}</p>
             <p>관객 평: {vote_average}</p>
             <p>{overview}</p>
+            <button>...더보기</button>
             </li>
         )
     

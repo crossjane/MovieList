@@ -114,6 +114,7 @@ function Main() {
     const copyMoviess = {...movies}
     copyMoviess[division] = filteredMovies
     setMovies(copyMoviess);
+    
   }
 
 
