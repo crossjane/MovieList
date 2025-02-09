@@ -109,13 +109,13 @@ function Main() {
     })
   }
 
-  function deleteItem(id, division){
-    const filteredMovies = movies[division].filter((movie) => movie.id !== id);
-    const copyMoviess = {...movies}
-    copyMoviess[division] = filteredMovies
-    setMovies(copyMoviess);
-    
-  }
+    function deleteItem(id, division){
+      const filteredMovies = movies[division].filter((movie) => movie.id !== id);
+      const copyMoviess = {...movies}
+      copyMoviess[division] = filteredMovies
+      setMovies(copyMoviess);
+      
+    }
 
 
   //주소값이 기떄문에.. 참조해서 만 쓴것. 
@@ -137,128 +137,159 @@ function Main() {
   }
 
   function onChangeInput(event, id, division){
-    if(division === "upcoming"){
-      const copyUpcomings =[...upcoming];
-      const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
-      if(findUpcoming){
-        findUpcoming.tempTitle = event.target.value;
-      }
-      setUpcoming(copyUpcomings);
-   } else if (division === "nowPlayings"){
-      const copyNowplayings =[...nowPlayings];
-      const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
-      if(findNowplayings){
-        findNowplayings.tempTitle = event.target.value;
-      }
-      setNowPlayings(copyNowplayings);
-   } else if (division === "topRated"){
-      const copyTopRated =[...topRated];
-      const findTopRated = copyTopRated.find((movie) => movie.id === id);
-      if(findTopRated){
-        findTopRated.tempTitle = event.target.value;
-      }
-      setTopRated(copyTopRated);
-    } else if (division === "popular"){
-      const copyPopulars =[...popular];
-      const findPopular = copyPopulars.find((movie) => movie.id === id);
-      if(findPopular){
-        findPopular.tempTitle = event.target.value;
-      }
-      setPopular(copyPopulars);
+
+    const copyMovies = {...movies};
+    const findMovieIndex= copyMovies[division].findIndex((movie) => movie.id === id);
+    if (findMovieIndex !== -1){
+      const copyFindMovie = {...copyMovies[division][findMovieIndex]};
+
+      copyFindMovie.tempTitle = event.tartget.value;
+    
     }
+    setMovies(copyMovies);
+
+
+  //   if(division === "upcoming"){
+  //     const copyUpcomings =[...upcoming];
+  //     const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+  //     if(findUpcoming){
+  //       findUpcoming.tempTitle = event.target.value;
+  //     }
+  //     setUpcoming(copyUpcomings);
+  //  } else if (division === "nowPlayings"){
+  //     const copyNowplayings =[...nowPlayings];
+  //     const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+  //     if(findNowplayings){
+  //       findNowplayings.tempTitle = event.target.value;
+  //     }
+  //     setNowPlayings(copyNowplayings);
+  //  } else if (division === "topRated"){
+  //     const copyTopRated =[...topRated];
+  //     const findTopRated = copyTopRated.find((movie) => movie.id === id);
+  //     if(findTopRated){
+  //       findTopRated.tempTitle = event.target.value;
+  //     }
+  //     setTopRated(copyTopRated);
+  //   } else if (division === "popular"){
+  //     const copyPopulars =[...popular];
+  //     const findPopular = copyPopulars.find((movie) => movie.id === id);
+  //     if(findPopular){
+  //       findPopular.tempTitle = event.target.value;
+  //     }
+  //     setPopular(copyPopulars);
+  //   }
     
   }
 
 
   function doneEditItem(id, division){
-      if(division === "upcoming"){
-        const copyUpcomings =[...upcoming];
-        const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
-        if(findUpcoming){
-          findUpcoming.title = findUpcoming.tempTitle;
-          findUpcoming.isEdit = false;
-        }
-        setUpcoming(copyUpcomings);
-    } else if (division === "nowPlayings"){
-        const copyNowplayings =[...nowPlayings];
-        const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
-        if(findNowplayings){
-          findNowplayings.title = findNowplayings.tempTitle;
-          findNowplayings.isEdit = false;
-        }
-        setNowPlayings(copyNowplayings);
-    } else if (division === "topRated"){
-        const copyTopRated =[...topRated];
-        const findTopRated = copyTopRated.find((movie) => movie.id === id);
-        if(findTopRated){
-          findTopRated.title = findTopRated.tempTitle;
-          findTopRated.isEdit = false;
-        }
-        setTopRated(copyTopRated);
-      } else if (division === "popular"){
-        const copyPopulars =[...popular];
-        const findPopular = copyPopulars.find((movie) => movie.id === id);
-        if(findPopular){
-          findPopular.title = findPopular.tempTitle;
-          findPopular.isEdit = false;
-        }
-        setPopular(copyPopulars);
-      }
+
+    const copyMovies = {...movies};
+    const findMovieIndex = copyMovies[division].findIndex((movie) => movie.id === id);
+    if(findMovieIndex !== -1){
+      const copyFindMovie = {...movies[division][findMovieIndex]};
+
+      copyFindMovie.title = copyFindMovie.tempTitle;
+      copyFindMovie.isEdit = false;
+    }
+    setMovies(copyMovies);
+    //   if(division === "upcoming"){ 
+    //     const copyUpcomings =[...upcoming];
+    //     const findUpcoming = copyUpcomings.find((movie) => movie.id === id);
+    //     if(findUpcoming){
+    //       findUpcoming.title = findUpcoming.tempTitle;
+    //       findUpcoming.isEdit = false;
+    //     }
+    //     setUpcoming(copyUpcomings);
+    // } else if (division === "nowPlayings"){
+    //     const copyNowplayings =[...nowPlayings];
+    //     const findNowplayings = copyNowplayings.find((movie) => movie.id === id);
+    //     if(findNowplayings){
+    //       findNowplayings.title = findNowplayings.tempTitle;
+    //       findNowplayings.isEdit = false;
+    //     }
+    //     setNowPlayings(copyNowplayings);
+    // } else if (division === "topRated"){
+    //     const copyTopRated =[...topRated];
+    //     const findTopRated = copyTopRated.find((movie) => movie.id === id);
+    //     if(findTopRated){
+    //       findTopRated.title = findTopRated.tempTitle;
+    //       findTopRated.isEdit = false;
+    //     }
+    //     setTopRated(copyTopRated);
+    //   } else if (division === "popular"){
+    //     const copyPopulars =[...popular];
+    //     const findPopular = copyPopulars.find((movie) => movie.id === id);
+    //     if(findPopular){
+    //       findPopular.title = findPopular.tempTitle;
+    //       findPopular.isEdit = false;
+    //     }
+    //     setPopular(copyPopulars);
+    //   }
     }
 
 
     function clickCheckbox(id, division){
-      if(division === "upcoming"){
-        const copyUpcomings= [...upcoming];
-        const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
-        if(!findUpcoming.isChecked){
-          findUpcoming.isChecked = true;
-        } else {
-          findUpcoming.isChecked= false;
-        }
-        setUpcoming(copyUpcomings);
-      }else if(division === "nowPlayings"){
-        const copyNowplayings= [...nowPlayings];
-        const findNowplayings = copyNowplayings.find((movie) =>movie.id === id  );
-        if(!findNowplayings.isChecked){
-          findNowplayings.isChecked = true;
-        } else {
-          findNowplayings.isChecked= false;
-        }
-        setNowPlayings(copyNowplayings);
-      }else if(division === "topRated"){
-        const copyTopRated= [...topRated];
-        const findTopRated = copyTopRated.find((movie) =>movie.id === id  );
-        if(!findTopRated.isChecked){
-          findTopRated.isChecked = true;
-        } else {
-          findTopRated.isChecked= false;
-        }
-        setTopRated(copyTopRated);
-      }else if(division === "popular"){
-        const copyPopulars= [...popular];
-        const findPopular = copyPopulars.find((movie) =>movie.id === id  );
-        if(!findPopular.isChecked){
-          findPopular.isChecked = true;
-        } else {
-          findPopular.isChecked= false;
-        }
-        setPopular(copyPopulars);
+      const copyMovies = {...movies};
+      const findMovieIndex = copyMovies[division].findIndex((movie) => movie.id === id);
+      if(findMovieIndex !== -1){
+        const copyFindMovie = {...movies[division][findMovieIndex]};
+        
+      // toggle 기능 !! 상태에 반대로 설정해줌!!!
+        copyFindMovie.isChecked = !copyFindMovie.isChecked;
+        copyMovies[division][findMovieIndex] = copyFindMovie;
+    
       }
-
-
-
+      setMovies(copyMovies);
+      // if(division === "upcoming"){
+      //   const copyUpcomings= [...upcoming];
+      //   const findUpcoming = copyUpcomings.find((movie) =>movie.id === id  );
+      //   if(!findUpcoming.isChecked){
+      //     findUpcoming.isChecked = true;
+      //   } else {
+      //     findUpcoming.isChecked= false;
+      //   }
+      //   setUpcoming(copyUpcomings);
+      // }else if(division === "nowPlayings"){
+      //   const copyNowplayings= [...nowPlayings];
+      //   const findNowplayings = copyNowplayings.find((movie) =>movie.id === id  );
+      //   if(!findNowplayings.isChecked){
+      //     findNowplayings.isChecked = true;
+      //   } else {
+      //     findNowplayings.isChecked= false;
+      //   }
+      //   setNowPlayings(copyNowplayings);
+      // }else if(division === "topRated"){
+      //   const copyTopRated= [...topRated];
+      //   const findTopRated = copyTopRated.find((movie) =>movie.id === id  );
+      //   if(!findTopRated.isChecked){
+      //     findTopRated.isChecked = true;
+      //   } else {
+      //     findTopRated.isChecked= false;
+      //   }
+      //   setTopRated(copyTopRated);
+      // }else if(division === "popular"){
+      //   const copyPopulars= [...popular];
+      //   const findPopular = copyPopulars.find((movie) =>movie.id === id  );
+      //   if(!findPopular.isChecked){
+      //     findPopular.isChecked = true;
+      //   } else {
+      //     findPopular.isChecked= false;
+      //   }
+      //   setPopular(copyPopulars);
+      // }
 
      }
 
-    function checkboxDelete(){
-      const filteredUpcoming = upcoming.filter((movie) => !movie.isChecked);
-      setUpcoming(filteredUpcoming);
+    function checkboxDelete(division){
+      const copyMovies = {...movies};
+      const filteredMovies = copyMovies[division].filter((movie) => !movie.isChecked);
+      copyMovies[division]  = filteredMovies;
+      setMovies(copyMovies);
+
     }
 
 
-
-  
 
 
    async function init(){

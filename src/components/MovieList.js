@@ -28,13 +28,13 @@ const MovieList = ({subTitle,
       };
 
 
-
+      
 
     return (
         <Fragment>
         <div className="division-container">
           <h1>{subTitle}</h1>
-          <button className="delete-btn" onClick={()=>checkboxDelete()}>
+          <button className="delete-btn" onClick={()=>checkboxDelete(division)}>
             <img src="/img/delete_btn.svg" alt="Eelete" />
           </button>
         </div>
