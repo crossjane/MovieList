@@ -112,7 +112,7 @@ function Main() {
     function deleteItem(id, division){
       const filteredMovies = movies[division].filter((movie) => movie.id !== id);
       const copyMoviess = {...movies}
-      copyMoviess[division] = filteredMovies
+      // copyMoviess[division] = filteredMovies
       setMovies(copyMoviess);
       
     }
@@ -141,12 +141,12 @@ function Main() {
     const copyMovies = {...movies};
     const findMovieIndex= copyMovies[division].findIndex((movie) => movie.id === id);
     if (findMovieIndex !== -1){
-      const copyFindMovie = {...copyMovies[division][findMovieIndex]};
-
-      copyFindMovie.tempTitle = event.tartget.value;
-    
+      copyMovies[division][findMovieIndex].tempTitle = event.target.value;
     }
     setMovies(copyMovies);
+
+  // 객체를 복사 -> 해당 인덱스를 찾음 -> 해당인덱스가 있다면 -> 해당 인덱스의 특정(division) 객체를 복사함 -> 그럼 그 객체의 tempTile로 들어가서 이벤트를 발생시킴-> 그 변경된
+   
 
 
   //   if(division === "upcoming"){
@@ -191,6 +191,10 @@ function Main() {
 
       copyFindMovie.title = copyFindMovie.tempTitle;
       copyFindMovie.isEdit = false;
+      
+      copyMovies[division][findMovieIndex] = copyFindMovie;
+
+
     }
     setMovies(copyMovies);
     //   if(division === "upcoming"){ 
