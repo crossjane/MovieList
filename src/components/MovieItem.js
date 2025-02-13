@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MovieItem = ({
     poster_path, 
@@ -18,8 +18,16 @@ const MovieItem = ({
     clickCheckbox,
     isChecked
 })=> {
-    return (
 
+
+    const [isMore, setIsMore] = useState(false);
+
+    function onClick(){
+        setIsMore(!isMore);
+
+    }
+
+    return (
         <li className="movieList-li">
     
             <input
@@ -63,8 +71,10 @@ const MovieItem = ({
             }           
             <p>개봉 일자: {release_date}</p>
             <p>관객 평: {vote_average}</p>
-            <p>{overview}</p>
-            <button>...더보기</button>
+            <p style={{height:280, overflowY:"scroll",scrollbarWidth:"none"}}>
+                {isMore ? overview : (overview.length > 250? `${overview.substring(0,250)}...` :overview)}
+            </p>
+            {overview.length < 250? null :<button onClick={onClick}>{isMore ? "접기" : "더보기"}</button>}
             </li>
         )
     
