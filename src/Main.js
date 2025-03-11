@@ -5,10 +5,10 @@ import "./App.css";
 
 
 function Main() {
-  const [nowPlayings, setNowPlayings] = useState([]);
-  const [popular, setPopular] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
+  // const [nowPlayings, setNowPlayings] = useState([]);
+  // const [popular, setPopular] = useState([]);
+  // const [topRated, setTopRated] = useState([]);
+  // const [upcoming, setUpcoming] = useState([]);
 
   const [movies, setMovies] = useState({
     nowPlayings:[],
