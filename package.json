@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "pm2-prod": "npx pm2 start 'npm start' --name movieList",
+    "pm2-prod": "npx pm2 start 'npm run serve-prod' --name movieList",
     "serve-prod":"npx serve -l 3000 -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
